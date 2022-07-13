@@ -42,7 +42,7 @@ body {
   margin: 2vw 0 0 5%;
   font-size: 1rem;
   opacity: 60%;
-  background-color: #cebdc7;
+  background-color: #0064a0;
   color: #fff;
 }
 #search::placeholder {
@@ -53,11 +53,14 @@ body {
   padding: 1vw;
 }
 #fake-temperature {
-  font-size: 2rem;
+  font-size: 3rem;
+  margin-top: 0.5rem;
   font-weight: 800;
 }
 #wind-speed {
-  font-size: 0.9rem;
+  font-size: 1rem;
+  margin: 0rem 0 0 -0.5rem;
+  text-align: left;
 }
 
 .middle-section {
@@ -76,8 +79,8 @@ body {
 }
 
 #current-day {
-  margin-top: 0vw;
-  margin-bottom: -1vw;
+  margin-top: 0;
+  margin-bottom: 0.1rem;
 }
 
 .info-right {
@@ -99,8 +102,8 @@ body {
 }
 
 #celsius-fahrenheit {
+  font-size: 1rem;
   display: inline;
-  float: right;
   text-decoration: none;
   color: #fff;
 }
@@ -134,7 +137,6 @@ body {
 
 .current-date-time {
   font-size: 1rem;
-  text-align: right;
   color: #fff;
 }
 
@@ -144,7 +146,7 @@ body {
 }
 
 .info-left {
-  margin: 2.5vw 0 0 0.5vw;
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
