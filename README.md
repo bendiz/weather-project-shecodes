@@ -1,2 +1,1 @@
-# git-test
- 
+# Practicing with a weather project.
