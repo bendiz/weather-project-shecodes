@@ -132,7 +132,7 @@ let wind = 0;
 let getWind = (response) => {
   wind = Math.round(response.data.wind.speed);
   let windText = document.querySelector("#wind-speed");
-  windText.innerHTML = `Wind:${wind}m/s`;
+  windText.innerHTML = `${wind}m/s`;
 };
 
 let displayCity = (event) => {
