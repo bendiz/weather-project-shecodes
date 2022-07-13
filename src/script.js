@@ -125,6 +125,7 @@ let getTemperature = (response) => {
   getWind(response);
   return celsius;
 };
+
 let wind = 0;
 
 let getWind = (response) => {
@@ -148,16 +149,19 @@ let temperatureLink = document.querySelector("#celsius-fahrenheit");
 let fakeTemperature = document.querySelector("#fake-temperature");
 let fakeFahrenheit = 0;
 let fakeCelsius = document.querySelector("#fake-temperature").innerHTML;
+let celsiusIcon = document.querySelector(".celsius");
 
 let temperatureConversion = () => {
-  if (temperatureLink.innerHTML === "°C") {
+  if (temperatureLink.innerHTML !== "°C") {
     fakeFahrenheit = celsiusToFahrenheit(celsius);
-    temperatureLink.innerHTML = "°F";
+    temperatureLink.innerHTML = "°C";
+    celsiusIcon.innerHTML = "°F |";
     fakeTemperature.innerHTML = fakeFahrenheit;
     return fakeFahrenheit;
-  } else if (temperatureLink.innerHTML === "°F") {
+  } else if (temperatureLink.innerHTML !== "°F") {
     fakeCelsius = fahrenheitToCelsius(fakeFahrenheit);
-    temperatureLink.innerHTML = "°C";
+    temperatureLink.innerHTML = "°F";
+    celsiusIcon.innerHTML = "°C |";
     fakeTemperature.innerHTML = fakeCelsius;
     return fakeCelsius;
   }
@@ -186,3 +190,7 @@ geoButton.addEventListener(
   "click",
   navigator.geolocation.getCurrentPosition(positionCoordinates)
 );
+
+// dark mode
+if (currentHour >= 1900) {
+}

@@ -74,8 +74,13 @@ form {
 }
 #fake-temperature {
   font-size: 3rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0 0;
   font-weight: 800;
+}
+
+.temperature-letters {
+  float: right;
+  margin-top: 1rem;
 }
 
 .fake-temperature-container {
@@ -85,10 +90,10 @@ form {
 
 #fake-temperature {
   display: inline;
-  float: left;
 }
 
-#celsius-fahrenheit {
+#celsius-fahrenheit,
+.celsius {
   font-size: 1rem;
   display: inline;
   text-decoration: none;
@@ -100,11 +105,8 @@ form {
 }
 
 #wind-speed {
-  font-size: 1rem;
-  margin: 0rem 0 0 -0.5rem;
-  text-align: left;
+  text-align: center;
 }
-
 .middle-section {
   font-family: "Titillium Web", sans-serif;
   display: flex;
@@ -115,10 +117,10 @@ form {
 }
 
 #current-city {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #cebdc7;
   font-weight: 800;
-  margin-top: 1rem;
+  margin-bottom: -0.5rem;
 }
 
 #current-day {
@@ -222,8 +224,6 @@ img.weather-icon {
   }
 
   .middle-section {
-    display: flex;
-    align-items: center;
     margin-top: 1vw;
     margin: 1vw 4vw 0;
   }
@@ -240,15 +240,13 @@ img.weather-icon {
     height: 40vw;
     width: 60vw;
   }
-
-  .middle-section {
-    display: flex;
-    align-items: center;
-    margin-top: 1vw;
-    margin: 1vw 4vw 0;
-  }
 }
 @media (max-width: 1200px) {
+  #fake-temperature {
+    font-size: 2.5rem;
+    margin: 0.5rem 0 0;
+    font-weight: 800;
+  }
   body {
     background-size: 150%;
   }
@@ -257,19 +255,25 @@ img.weather-icon {
   }
 
   .weather-card {
-    height: 40vw;
+    height: 42vw;
     width: 60vw;
   }
 
   .middle-section {
-    display: flex;
-    align-items: center;
     margin-top: 1vw;
     margin: 1vw 4vw 0;
   }
 }
 
-@media (max-width: 850px) {
+@media (min-width: 780px) and (max-width: 1099px) {
+  #current-city {
+    font-size: 2.5rem;
+  }
+  #fake-temperature {
+    font-size: 3rem;
+    margin: 0.5rem 0 0;
+    font-weight: 800;
+  }
   body {
     background-size: 200%;
   }
@@ -279,7 +283,7 @@ img.weather-icon {
   }
 }
 
-@media (min-width: 651px) and (max-width: 706px) {
+@media (min-width: 651px) and (max-width: 799px) {
   body {
     background-size: 200%;
   }
@@ -325,6 +329,31 @@ img.weather-icon {
   }
 }
 
+@media (min-width: 745px) and (max-width: 1000px) {
+  #fake-temperature {
+    font-size: 4rem;
+  }
+  .temperature-letters {
+    display: block;
+    float: left;
+    margin-top: -0.4rem;
+    margin-left: 1rem;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 744px) {
+  #fake-temperature {
+    font-size: 4rem;
+    margin: 0.5rem 0 0;
+  }
+  .temperature-letters {
+    display: block;
+    float: left;
+    margin-top: -0.4rem;
+    margin-left: 1.2rem;
+  }
+}
+
 @media (min-width: 419px) and (max-width: 534px) {
   body {
     background-size: 250%;
@@ -348,19 +377,6 @@ img.weather-icon {
 
   .weather-card {
     height: 85vw;
-    width: 95vw;
-  }
-}
-
-@media (min-width: 350px) and (max-width: 400px) {
-  body {
-    background-size: 300%;
-  }
-  #fake-temperature {
-    font-size: 1.5rem;
-  }
-  .weather-card {
-    height: 80vw;
     width: 95vw;
   }
 }
