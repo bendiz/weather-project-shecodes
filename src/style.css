@@ -7,6 +7,9 @@ element.style {
 }
 
 body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
   background-image: url("/img/jpg/clouds.jpg");
   background-size: 130%;
   font-family: "Titillium Web", sans-serif;
@@ -37,6 +40,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1 0 auto;
 }
 
 #search {
@@ -52,6 +56,17 @@ form {
 }
 #search::placeholder {
   color: #fff;
+}
+
+#geo-button {
+  padding: 2.5vw 2vw 0 1vw;
+  border: 0;
+  background-color: transparent;
+  color: #fff;
+  opacity: 50%;
+}
+#geo-button:hover {
+  color: #cebdc7;
 }
 .weather-card ::placeholder {
   opacity: 50%;
@@ -169,16 +184,31 @@ img.weather-icon {
   font-weight: 300;
   margin-bottom: 0;
 }
-
-#geo-button {
-  padding: 2.5vw 2vw 0 1vw;
-  border: 0;
-  background-color: transparent;
+#links {
+  width: 100%;
+  align-items: center;
+  background-color: #0064a0;
+  bottom: 0;
+  left: 0;
   color: #fff;
-  opacity: 50%;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 1rem;
+  position: fixed;
+  height: 1.5rem;
+  justify-content: center;
+  opacity: 60%;
 }
-#geo-button:hover {
-  color: #cebdc7;
+
+.social-icons {
+  padding: 0.2rem;
+}
+
+.social-links {
+  color: #fff;
+}
+.social-links:hover {
+  color: #00aeff;
 }
 
 @media (min-width: 1301px) and (max-width: 1500px) {
