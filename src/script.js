@@ -60,18 +60,16 @@ function weatherMessage(citySelection) {
 }
 
 // Make first letter of city capitalized
-function lowerToUpperCase(citySelection) {
-  upperCaseLetter = citySelection.charAt(0).toUpperCase();
-  lowerCaseLetters = citySelection.substring(1);
-  city = upperCaseLetter.concat(lowerCaseLetters);
+function lowerToUpperCase(words) {
+  let splitWords = words.toLowerCase().split(" ");
+  for (let i = 0; i < splitWords.length; i++) {
+    splitWords[i] =
+      splitWords[i].charAt(0).toUpperCase() + splitWords[i].substring(1);
+  }
+  city = splitWords.join(" ");
   return city;
 }
 
-// Homework week 4 //
-
-// Feature 1 - Display current day and time
-
-// Current day
 let date = new Date();
 
 let currentDayText = document.querySelector("#current-day");
