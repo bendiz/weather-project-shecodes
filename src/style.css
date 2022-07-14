@@ -44,6 +44,7 @@ form {
 }
 
 #current-date-time {
+  opacity: 60%;
   margin: 0 0 -1rem 0;
 }
 
