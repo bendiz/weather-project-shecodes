@@ -183,6 +183,7 @@ let nightMode = (response) => {
       "radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.7) 0%, rgba(64, 64, 64, 0.7) 90.2%)";
     searchElement.style.backgroundColor = "#423e57";
     cityNameText.style.color = "#423e57";
-    socialLinksElement.style.backgroundColor = "#423e57";
+    socialLinksElement.style.background =
+      "radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.7) 0%, rgba(64, 64, 64, 0.7) 90.2%)";
   }
 };
