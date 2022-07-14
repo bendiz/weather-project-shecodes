@@ -28,7 +28,7 @@ form {
 .weather-card {
   margin: 10vw auto;
   width: 50vw;
-  height: 32vw;
+  height: 30vw;
   border-radius: 0.2rem;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
   background: linear-gradient(
@@ -41,6 +41,10 @@ form {
   flex-direction: column;
   align-items: center;
   flex: 1 0 auto;
+}
+
+#current-date-time {
+  margin: 0 0 -1rem 0;
 }
 
 #search {
@@ -104,27 +108,23 @@ form {
   color: #cebdc7;
 }
 
-#wind-speed {
-  text-align: center;
-}
 .middle-section {
   font-family: "Titillium Web", sans-serif;
   display: flex;
   align-items: center;
-  gap: 10vw;
+  gap: 8vw;
   margin-top: 1vw;
-  margin: 1vw 4vw 0;
+  margin: 1vw 3.5vw 0;
 }
 
 #current-city {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   color: #cebdc7;
   font-weight: 800;
-  margin-bottom: -0.5rem;
 }
 
 #current-day {
-  margin-top: 0;
+  margin-top: -0.5rem;
 }
 
 .info-right {
@@ -135,7 +135,7 @@ form {
 }
 
 .current-city {
-  margin-top: 2.4vw;
+  margin-top: 1vh;
 }
 
 .current-day {
@@ -144,6 +144,7 @@ form {
 
 .current-date-time {
   font-size: 0.8rem;
+  text-align: center;
 }
 
 .current-weather-section {
@@ -159,7 +160,7 @@ form {
 
 img.weather-icon {
   margin-left: -5%;
-  width: 60%;
+  width: 50%;
 }
 
 .bottom-section {
@@ -243,7 +244,7 @@ img.weather-icon {
 }
 @media (max-width: 1200px) {
   #fake-temperature {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     margin: 0.5rem 0 0;
     font-weight: 800;
   }
@@ -262,46 +263,6 @@ img.weather-icon {
   .middle-section {
     margin-top: 1vw;
     margin: 1vw 4vw 0;
-  }
-}
-
-@media (min-width: 780px) and (max-width: 1099px) {
-  #current-city {
-    font-size: 2.5rem;
-  }
-  #fake-temperature {
-    font-size: 3rem;
-    margin: 0.5rem 0 0;
-    font-weight: 800;
-  }
-  body {
-    background-size: 200%;
-  }
-  .weather-card {
-    height: 50vw;
-    width: 70vw;
-  }
-}
-
-@media (min-width: 651px) and (max-width: 799px) {
-  body {
-    background-size: 200%;
-  }
-  .current-city {
-    font-size: 1.8rem;
-  }
-
-  .weather-card {
-    height: 58vw;
-    width: 80vw;
-  }
-
-  .middle-section {
-    display: flex;
-    align-items: center;
-    margin-top: 1vw;
-    margin: 1vw 4vw 0;
-    gap: 12vw;
   }
 }
 

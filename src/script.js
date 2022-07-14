@@ -69,50 +69,50 @@ function lowerToUpperCase(words) {
   city = splitWords.join(" ");
   return city;
 }
+let getCurrentDate = (response) => {
+  let date = new Date(response.data.dt * 1000);
+  let currentDayText = document.querySelector("#current-day");
+  let numberOfDay = date.getDay();
 
-let date = new Date();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
-let currentDayText = document.querySelector("#current-day");
-let numberOfDay = date.getDay();
+  let currentDay = days[numberOfDay];
 
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+  currentDayText.innerHTML = currentDay;
 
-let currentDay = days[numberOfDay];
-let cityInput = "";
-currentDayText.innerHTML = currentDay.toUpperCase();
-
-// Current Time
-let months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-let currentDate = date.getDate();
-let currentMonth = months[date.getMonth()];
-let currentYear = date.getFullYear();
-let currentHour = date.getHours();
-let currentMinute = String(date.getMinutes()).padStart(2, "0");
-let currentTimeText = document.querySelector("#current-date-time");
-currentTimeText.innerHTML = `${currentDate}.${currentMonth} ${currentYear} - ${currentHour}:${currentMinute}`;
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let currentDate = date.getDate();
+  let currentMonth = months[date.getMonth()];
+  let currentYear = date.getFullYear();
+  let currentHour = date.getHours();
+  let currentMinute = String(date.getMinutes()).padStart(2, "0");
+  let currentTimeText = document.querySelector("#current-date-time");
+  currentTimeText.innerHTML = `Last updated: ${currentDate}.${currentMonth} ${currentYear} @ ${currentHour}:${currentMinute}`;
+};
 
 // Add search engine  - real time/date/cityname/temp
+let cityInput = "";
 let cityNameText = document.querySelector("#current-city");
 let form = document.querySelector("#search-form");
 let units = "metric";
@@ -123,6 +123,7 @@ let getTemperature = (response) => {
   let temperatureText = document.querySelector("#fake-temperature");
   temperatureText.innerHTML = celsius;
   getWind(response);
+  getCurrentDate(response);
   return celsius;
 };
 
@@ -192,5 +193,5 @@ geoButton.addEventListener(
 );
 
 // dark mode
-if (currentHour >= 1900) {
-}
+// if (currentHour >= 1900) {
+// }
