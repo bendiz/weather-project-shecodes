@@ -21,54 +21,44 @@ let weather = {
   },
 };
 
-// Variables
-let message = "";
+// Variables used across several functions
+let apiKey = "58c0ef7fd7e74079efc9a68d7040f613";
 let celsius = 0;
 let fahrenheit = 0;
-let humidity = 0;
-let upperCaseLetter = "";
-let lowerCaseLetters = "";
-let city = "";
+let cityNameText = document.querySelector("#current-city");
+let units = "metric";
+let temperatureLink = document.querySelector("#celsius-fahrenheit");
+let cityInput = "";
+let form = document.querySelector("#search-form");
+let geoButton = document.querySelector("#geo-button");
+let fakeTemperature = document.querySelector("#fake-temperature");
+let fakeCelsius = document.querySelector("#fake-temperature").innerHTML;
+let celsiusIcon = document.querySelector(".celsius");
+let fakeFahrenheit = 0;
 
 // Converts celsius into fahrenheit
-function celsiusToFahrenheit(celsius) {
+let celsiusToFahrenheit = (celsius) => {
   fahrenheit = (celsius *= 1.8) + 32;
   return Math.round(fahrenheit);
-}
+};
 
 // Converts fahrenheit to celsius
-function fahrenheitToCelsius(fahrenheit) {
+let fahrenheitToCelsius = (fahrenheit) => {
   celsius = ((fahrenheit - 32) * 5) / 9;
   return Math.round(celsius);
-}
-
-// If the city exists in the object - display a rounded number of temp and humidity in both celsius and fahrenheit.
-// Else redirect the user to search for the user inputted city in google.
-function weatherMessage(citySelection) {
-  if (weather[citySelection] !== undefined) {
-    celsius = Math.round(weather[citySelection].temp);
-    celsiusToFahrenheit(celsius);
-    humidity = weather[citySelection].humidity;
-    message = `It´s currently ${celsius}°C (${fahrenheit}°F) in ${lowerToUpperCase(
-      citySelection
-    )} with a humidity of ${humidity}%`;
-    alert(message);
-  } else
-    alert(
-      `Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+${citySelection}`
-    );
-}
+};
 
 // Make first letter of city capitalized
-function lowerToUpperCase(words) {
+let lowerToUpperCase = (words) => {
   let splitWords = words.toLowerCase().split(" ");
   for (let i = 0; i < splitWords.length; i++) {
     splitWords[i] =
       splitWords[i].charAt(0).toUpperCase() + splitWords[i].substring(1);
   }
-  city = splitWords.join(" ");
+  let city = splitWords.join(" ");
   return city;
-}
+};
+
 let getCurrentDate = (response) => {
   let date = new Date(response.data.dt * 1000);
   let currentDayText = document.querySelector("#current-day");
@@ -110,47 +100,34 @@ let getCurrentDate = (response) => {
   let currentTimeText = document.querySelector("#current-date-time");
   currentTimeText.innerHTML = `Last updated: ${currentDate}.${currentMonth} ${currentYear} @ ${currentHour}:${currentMinute}`;
 };
+let getWind = (response) => {
+  let wind = Math.round(response.data.wind.speed);
+  let windText = document.querySelector("#wind-speed");
+  windText.innerHTML = `${wind}m/s`;
+};
 
-// Add search engine  - real time/date/cityname/temp
-let cityInput = "";
-let cityNameText = document.querySelector("#current-city");
-let form = document.querySelector("#search-form");
-let units = "metric";
-let apiKey = "58c0ef7fd7e74079efc9a68d7040f613";
-
-let getTemperature = (response) => {
+let updateWeather = (response) => {
+  console.log(response);
   celsius = Math.round(response.data.main.temp);
   let temperatureText = document.querySelector("#fake-temperature");
   temperatureText.innerHTML = celsius;
   getWind(response);
   getCurrentDate(response);
+  let weatherIconElement = document.getElementById("weather-forecast-icon");
+  weatherIconElement.src = `img/weather-icons/png/${response.data.weather[0].icon}.png`;
   return celsius;
-};
-
-let wind = 0;
-
-let getWind = (response) => {
-  wind = Math.round(response.data.wind.speed);
-  let windText = document.querySelector("#wind-speed");
-  windText.innerHTML = `${wind}m/s`;
 };
 
 let displayCity = (event) => {
   event.preventDefault();
   cityInput = document.getElementById("search").value.toLowerCase().trim();
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrl).then(getTemperature);
+  axios.get(apiUrl).then(updateWeather);
   cityNameText.innerHTML = `${lowerToUpperCase(cityInput)}`;
+  axios.get(apiUrl).then(nightMode);
 };
 
 form.addEventListener("submit", displayCity);
-
-// Bonus Feature
-let temperatureLink = document.querySelector("#celsius-fahrenheit");
-let fakeTemperature = document.querySelector("#fake-temperature");
-let fakeFahrenheit = 0;
-let fakeCelsius = document.querySelector("#fake-temperature").innerHTML;
-let celsiusIcon = document.querySelector(".celsius");
 
 let temperatureConversion = () => {
   if (temperatureLink.innerHTML !== "°C") {
@@ -169,12 +146,11 @@ let temperatureConversion = () => {
 };
 temperatureLink.addEventListener("click", temperatureConversion);
 
-// Bonus week 5
-
 let geoLocation = (response) => {
+  let cityNameText = "";
   let location = response.data.name;
   cityNameText.innerHTML = `${lowerToUpperCase(location)}`;
-  getTemperature(response);
+  updateWeather(response);
   getWind(response);
   return location;
 };
@@ -185,13 +161,28 @@ let positionCoordinates = (position) => {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(geoLocation);
 };
-
-let geoButton = document.querySelector("#geo-button");
 geoButton.addEventListener(
   "click",
   navigator.geolocation.getCurrentPosition(positionCoordinates)
 );
 
-// dark mode
-// if (currentHour >= 1900) {
-// }
+let nightMode = (response) => {
+  let bodyElement = document.querySelector("#body");
+  let weatherCardElement = document.querySelector(".weather-card");
+  let searchElement = document.querySelector("#search");
+  let socialLinksElement = document.querySelector("#links");
+  let socialLinksAnchorElement = document.querySelector(
+    ".social-link-1 .social-link-2 .social-link-3"
+  );
+  console.log(response.data.weather[0].icon.charAt(2));
+  let letter = response.data.weather[0].icon.charAt(2);
+  console.log(letter);
+  if (letter == "n") {
+    bodyElement.style.backgroundImage = "url('img/jpg/starrysky.jpg')";
+    weatherCardElement.style.background =
+      "radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.7) 0%, rgba(64, 64, 64, 0.7) 90.2%)";
+    searchElement.style.backgroundColor = "#423e57";
+    cityNameText.style.color = "#423e57";
+    socialLinksElement.style.backgroundColor = "#423e57";
+  }
+};

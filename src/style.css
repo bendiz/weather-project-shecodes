@@ -10,9 +10,12 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  font-family: "Titillium Web", sans-serif;
+}
+
+#body {
   background-image: url("/img/jpg/clouds.jpg");
   background-size: 130%;
-  font-family: "Titillium Web", sans-serif;
 }
 
 form {
@@ -212,7 +215,7 @@ img.weather-icon {
   color: #fff;
 }
 .social-links:hover {
-  color: #00aeff;
+  color: #474747;
 }
 
 @media (min-width: 1301px) and (max-width: 1500px) {
