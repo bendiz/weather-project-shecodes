@@ -33,7 +33,7 @@ let form = document.querySelector("#search-form");
 let geoButton = document.querySelector("#geo-button");
 let fakeTemperature = document.querySelector("#fake-temperature");
 let fakeCelsius = document.querySelector("#fake-temperature").innerHTML;
-let celsiusIcon = document.querySelector(".celsius");
+let celsiusIconElement = document.querySelector(".celsius");
 let fakeFahrenheit = 0;
 
 // Converts celsius into fahrenheit
@@ -107,7 +107,6 @@ let getWind = (response) => {
 };
 
 let updateWeather = (response) => {
-  console.log(response);
   celsius = Math.round(response.data.main.temp);
   let temperatureText = document.querySelector("#fake-temperature");
   temperatureText.innerHTML = celsius;
@@ -133,25 +132,27 @@ let temperatureConversion = () => {
   if (temperatureLink.innerHTML !== "°C") {
     fakeFahrenheit = celsiusToFahrenheit(celsius);
     temperatureLink.innerHTML = "°C";
-    celsiusIcon.innerHTML = "°F |";
+    celsiusIconElement.innerHTML = "°F |";
     fakeTemperature.innerHTML = fakeFahrenheit;
     return fakeFahrenheit;
   } else if (temperatureLink.innerHTML !== "°F") {
     fakeCelsius = fahrenheitToCelsius(fakeFahrenheit);
     temperatureLink.innerHTML = "°F";
-    celsiusIcon.innerHTML = "°C |";
+    celsiusIconElement.innerHTML = "°C |";
     fakeTemperature.innerHTML = fakeCelsius;
     return fakeCelsius;
   }
 };
 temperatureLink.addEventListener("click", temperatureConversion);
 
+let geoPosition = () => {
+  navigator.geolocation.getCurrentPosition(positionCoordinates);
+};
+
 let geoLocation = (response) => {
-  let cityNameText = "";
   let location = response.data.name;
   cityNameText.innerHTML = `${lowerToUpperCase(location)}`;
   updateWeather(response);
-  getWind(response);
   return location;
 };
 
@@ -161,19 +162,13 @@ let positionCoordinates = (position) => {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(geoLocation);
 };
-geoButton.addEventListener(
-  "click",
-  navigator.geolocation.getCurrentPosition(positionCoordinates)
-);
+geoButton.addEventListener("click", geoPosition);
 
 let nightMode = (response) => {
   let bodyElement = document.querySelector("#body");
   let weatherCardElement = document.querySelector(".weather-card");
   let searchElement = document.querySelector("#search");
   let socialLinksElement = document.querySelector("#links");
-  let socialLinksAnchorElement = document.querySelector(
-    ".social-link-1 .social-link-2 .social-link-3"
-  );
   console.log(response.data.weather[0].icon.charAt(2));
   let letter = response.data.weather[0].icon.charAt(2);
   console.log(letter);
@@ -185,5 +180,12 @@ let nightMode = (response) => {
     cityNameText.style.color = "#423e57";
     socialLinksElement.style.background =
       "radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.7) 0%, rgba(64, 64, 64, 0.7) 90.2%)";
+  } else if (letter == "d") {
+    bodyElement.style.backgroundImage = "url('img/jpg/clouds.jpg')";
+    weatherCardElement.style.background =
+      "linear-gradient(-225deg, #8dc8ff7d 0%, #c5dadb3f 48%, #a8ecff39 100%)";
+    searchElement.style.backgroundColor = "#0064a0";
+    cityNameText.style.color = "#cebdc7";
+    socialLinksElement.style.background = "#0064a0";
   }
 };
