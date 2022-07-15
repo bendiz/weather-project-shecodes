@@ -106,12 +106,21 @@ let getWind = (response) => {
   windText.innerHTML = `${wind}m/s`;
 };
 
+let getWeatherDescription = (response) => {
+  let weatherDescription = response.data.weather[0].description;
+  let weatherDescriptionElement = document.getElementById(
+    "weather-description"
+  );
+  weatherDescriptionElement.innerHTML = lowerToUpperCase(weatherDescription);
+};
+
 let updateWeather = (response) => {
   celsius = Math.round(response.data.main.temp);
   let temperatureText = document.querySelector("#fake-temperature");
   temperatureText.innerHTML = celsius;
   getWind(response);
   getCurrentDate(response);
+  getWeatherDescription(response);
   let weatherIconElement = document.getElementById("weather-forecast-icon");
   weatherIconElement.src = `img/weather-icons/png/${response.data.weather[0].icon}.png`;
   return celsius;
@@ -125,8 +134,6 @@ let displayCity = (event) => {
   cityNameText.innerHTML = `${lowerToUpperCase(cityInput)}`;
   axios.get(apiUrl).then(nightMode);
 };
-
-form.addEventListener("submit", displayCity);
 
 let temperatureConversion = () => {
   if (temperatureLink.innerHTML !== "°C") {
@@ -143,7 +150,6 @@ let temperatureConversion = () => {
     return fakeCelsius;
   }
 };
-temperatureLink.addEventListener("click", temperatureConversion);
 
 let geoPosition = () => {
   navigator.geolocation.getCurrentPosition(positionCoordinates);
@@ -162,16 +168,12 @@ let positionCoordinates = (position) => {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(geoLocation);
 };
-geoButton.addEventListener("click", geoPosition);
-
 let nightMode = (response) => {
   let bodyElement = document.querySelector("#body");
   let weatherCardElement = document.querySelector(".weather-card");
   let searchElement = document.querySelector("#search");
   let socialLinksElement = document.querySelector("#links");
-  console.log(response.data.weather[0].icon.charAt(2));
   let letter = response.data.weather[0].icon.charAt(2);
-  console.log(letter);
   if (letter == "n") {
     bodyElement.style.backgroundImage = "url('img/jpg/starrysky.jpg')";
     weatherCardElement.style.background =
@@ -189,3 +191,7 @@ let nightMode = (response) => {
     socialLinksElement.style.background = "#0064a0";
   }
 };
+
+form.addEventListener("submit", displayCity);
+temperatureLink.addEventListener("click", temperatureConversion);
+geoButton.addEventListener("click", geoPosition);

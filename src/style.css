@@ -81,7 +81,7 @@ form {
   padding: 1vw;
 }
 #fake-temperature {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin: 0.5rem 0 0;
   font-weight: 800;
 }
@@ -122,7 +122,7 @@ form {
 }
 
 #current-city {
-  font-size: 3.5rem;
+  font-size: 3rem;
   color: #cebdc7;
   font-weight: 800;
 }
@@ -132,6 +132,7 @@ form {
 }
 
 .info-right {
+  width: 85%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -154,8 +155,18 @@ form {
 .current-weather-section {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
 }
 
+.weather-description {
+  width: 85%;
+  margin: -4.5rem 0 0 60%;
+}
 .info-left {
   display: flex;
   flex-direction: column;
@@ -164,7 +175,7 @@ form {
 
 img.weather-icon {
   margin-left: -5%;
-  width: 50%;
+  width: 60%;
 }
 
 .bottom-section {
@@ -248,7 +259,7 @@ img.weather-icon {
 }
 @media (max-width: 1200px) {
   #fake-temperature {
-    font-size: 3.5rem;
+    font-size: 3rem;
     margin: 0.5rem 0 0;
     font-weight: 800;
   }
@@ -270,7 +281,7 @@ img.weather-icon {
   }
 }
 
-@media (min-width: 579px) and (max-width: 650px) {
+@media (min-width: 579px) and (max-width: 699px) {
   body {
     background-size: 200%;
   }
@@ -296,26 +307,38 @@ img.weather-icon {
 
 @media (min-width: 745px) and (max-width: 1000px) {
   #fake-temperature {
-    font-size: 4rem;
+    font-size: 2.5rem;
   }
-  .temperature-letters {
-    display: block;
-    float: left;
-    margin-top: -0.4rem;
-    margin-left: 1rem;
+  #current-city {
+    font-size: 2rem;
+  }
+  .weather-description {
+    width: 85%;
+    margin: -3rem 0 0 60%;
   }
 }
 
-@media (min-width: 300px) and (max-width: 744px) {
-  #fake-temperature {
-    font-size: 4rem;
-    margin: 0.5rem 0 0;
+@media (min-width: 300px) and (max-width: 534px) {
+  #body {
+    background-size: 250%;
   }
-  .temperature-letters {
+  .weather-card {
+    height: 70vw;
+    width: 95vw;
+  }
+  #current-city {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  #fake-temperature {
     display: block;
-    float: left;
-    margin-top: -0.4rem;
-    margin-left: 1.2rem;
+    font-size: 1.5rem;
+    margin: 0.5rem 0 -1rem 0;
+  }
+  .weather-description {
+    font-size: 0.5rem;
+    width: 85%;
+    margin: -1rem 0 0 50%;
   }
 }
 
@@ -325,6 +348,9 @@ img.weather-icon {
   }
   #fake-temperature {
     font-size: 2.2rem;
+  }
+  #weather-description {
+    font-size: 0.8rem;
   }
   .weather-card {
     height: 80vw;
@@ -338,6 +364,10 @@ img.weather-icon {
   }
   #fake-temperature {
     font-size: 2.2rem;
+  }
+
+  #weather-description {
+    font-size: 0.8rem;
   }
 
   .weather-card {
