@@ -173,6 +173,9 @@ let nightMode = (response) => {
   let weatherCardElement = document.querySelector(".weather-card");
   let searchElement = document.querySelector("#search");
   let socialLinksElement = document.querySelector("#links");
+  let weatherDescriptionElement = document.querySelector(
+    ".weather-description"
+  );
   let letter = response.data.weather[0].icon.charAt(2);
   if (letter == "n") {
     bodyElement.style.backgroundImage = "url('img/jpg/starrysky.jpg')";
@@ -180,6 +183,7 @@ let nightMode = (response) => {
       "radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.7) 0%, rgba(64, 64, 64, 0.7) 90.2%)";
     searchElement.style.backgroundColor = "#423e57";
     cityNameText.style.color = "#423e57";
+    weatherDescriptionElement.style.color = "#423e57";
     socialLinksElement.style.background =
       "radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.7) 0%, rgba(64, 64, 64, 0.7) 90.2%)";
   } else if (letter == "d") {
