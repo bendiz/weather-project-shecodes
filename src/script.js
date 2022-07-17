@@ -69,7 +69,7 @@ let getCurrentDate = (response) => {
   let currentDate = date.getDate();
   let currentMonth = months[date.getMonth()];
   let currentYear = date.getFullYear();
-  let currentHour = date.getHours();
+  let currentHour = String(date.getHours()).padStart(2, "0");
   let currentMinute = String(date.getMinutes()).padStart(2, "0");
   let currentTimeText = document.querySelector("#current-date-time");
   currentTimeText.innerHTML = `Last updated: ${currentDate}.${currentMonth} ${currentYear} @ ${currentHour}:${currentMinute}`;
@@ -181,8 +181,6 @@ let nightMode = (response) => {
     weatherCardElement.style.background =
       "radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.7) 0%, rgba(64, 64, 64, 0.7) 90.2%)";
     searchElement.style.backgroundColor = "#423e57";
-    cityNameText.style.color = "#423e57";
-    weatherDescriptionElement.style.color = "#423e57";
     socialLinksElement.style.background =
       "radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.7) 0%, rgba(64, 64, 64, 0.7) 90.2%)";
   } else if (letter == "d") {
@@ -190,9 +188,7 @@ let nightMode = (response) => {
     weatherCardElement.style.background =
       "linear-gradient(-225deg, #8dc8ff7d 0%, #c5dadb3f 48%, #a8ecff39 100%)";
     searchElement.style.backgroundColor = "#0064a0";
-    cityNameText.style.color = "#cebdc7";
     socialLinksElement.style.background = "#0064a0";
-    weatherDescriptionElement.style.color = "#fff";
   }
 };
 
