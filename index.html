@@ -68,7 +68,7 @@
             <div class="info-left">
               <link class="current-temp" />
               <div class="fake-temperature-container">
-                <h2 id="fake-temperature">22</h2>
+                <h2 id="temperature">22</h2>
                 <span class="temperature-letters"
                   ><p class="celsius">°C |</p>
                   <a href="#" id="celsius-fahrenheit">°F</a>
@@ -85,55 +85,20 @@
             <h3 class="current-day" id="current-day"></h3>
           </div>
         </div>
-        <div class="bottom-section">
+        <div class="bottom-section" id="forecast">
           <div class="weather-forecast-one">
-            <p class="forecast-text forecast">Thu</p>
+            <p class="forecast-text forecast" id="forecast-text">Thu</p>
 
             <img
               src="img/weather-icons/png/01d.png"
               class="weather-forecast-icon"
+              id="forecast-icon"
               alt="rain"
             />
-            <p class="forecast-temperature forecast">17°C</p>
-          </div>
-          <div class="weather-forecast-two">
-            <p class="forecast-text forecast">Fri</p>
-
-            <img
-              src="img/weather-icons/png/02d.png"
-              class="weather-forecast-icon"
-              alt="weather icon"
-            />
-            <p class="forecast-temperature forecast">11°C</p>
-          </div>
-          <div class="weather-forecast-three">
-            <p class="forecast-text forecast">Sat</p>
-
-            <img
-              src="img/weather-icons/png/01d.png"
-              class="weather-forecast-icon"
-              alt="weather icon"
-            />
-            <p class="forecast-temperature forecast">12°C</p>
-          </div>
-          <div class="weather-forecast-four">
-            <p class="forecast-text forecast">Sun</p>
-            <img
-              src="img/weather-icons/png/03d.png"
-              class="weather-forecast-icon"
-              alt="weather icon"
-            />
-
-            <p class="forecast-temperature forecast">14°C</p>
-          </div>
-          <div class="weather-forecast-five">
-            <p class="forecast-text forecast">Thu</p>
-            <img
-              src="img/weather-icons/png/50d.png"
-              class="weather-forecast-icon"
-              alt="weather icon"
-            />
-            <p class="forecast-temperature forecast">16°C</p>
+            <p class="forecast-temperature forecast">
+              <span class="min-temperature" id="min-temperature"> 16°</span>
+              <span class="max-temperature" id="max-temperature">18°</span>
+            </p>
           </div>
         </div>
       </div>

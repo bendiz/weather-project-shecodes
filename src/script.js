@@ -1,26 +1,3 @@
-let weather = {
-  paris: {
-    temp: 19.7,
-    humidity: 80,
-  },
-  tokyo: {
-    temp: 17.3,
-    humidity: 50,
-  },
-  lisbon: {
-    temp: 30.2,
-    humidity: 20,
-  },
-  "san francisco": {
-    temp: 20.9,
-    humidity: 100,
-  },
-  oslo: {
-    temp: -5,
-    humidity: 20,
-  },
-};
-
 // Variables used across several functions
 let apiKey = "58c0ef7fd7e74079efc9a68d7040f613";
 let celsius = 0;
@@ -28,13 +5,9 @@ let fahrenheit = 0;
 let cityNameText = document.querySelector("#current-city");
 let units = "metric";
 let temperatureLink = document.querySelector("#celsius-fahrenheit");
-let cityInput = "";
 let form = document.querySelector("#search-form");
 let geoButton = document.querySelector("#geo-button");
-let fakeTemperature = document.querySelector("#fake-temperature");
-let fakeCelsius = document.querySelector("#fake-temperature").innerHTML;
-let celsiusIconElement = document.querySelector(".celsius");
-let fakeFahrenheit = 0;
+let bodyElement = document.querySelector("#body");
 
 // Converts celsius into fahrenheit
 let celsiusToFahrenheit = (celsius) => {
@@ -59,6 +32,7 @@ let lowerToUpperCase = (words) => {
   return city;
 };
 
+// Gets current date and updates the text of the last updated section
 let getCurrentDate = (response) => {
   let date = new Date(response.data.dt * 1000);
   let currentDayText = document.querySelector("#current-day");
@@ -100,12 +74,15 @@ let getCurrentDate = (response) => {
   let currentTimeText = document.querySelector("#current-date-time");
   currentTimeText.innerHTML = `Last updated: ${currentDate}.${currentMonth} ${currentYear} @ ${currentHour}:${currentMinute}`;
 };
+
+// Gets current wind in m/s
 let getWind = (response) => {
   let wind = Math.round(response.data.wind.speed);
   let windText = document.querySelector("#wind-speed");
   windText.innerHTML = `${wind}m/s`;
 };
 
+// Gets the weather description and updates the description to uppercase letters in the beginning of every word.
 let getWeatherDescription = (response) => {
   let weatherDescription = response.data.weather[0].description;
   let weatherDescriptionElement = document.getElementById(
@@ -114,19 +91,32 @@ let getWeatherDescription = (response) => {
   weatherDescriptionElement.innerHTML = lowerToUpperCase(weatherDescription);
 };
 
+// Gets the coordinates for the apiUrl then calls the function that displays the forecast
+let getForecast = (response) => {
+  let longitude = response.lon;
+  let latitude = response.lat;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
+
+  axios.get(apiUrl).then(displayForecast);
+};
+
+//  Finds the rounded number of temperature and updates the current wind, "last updated", weather description, weather icon and forecast.
 let updateWeather = (response) => {
   celsius = Math.round(response.data.main.temp);
-  let temperatureText = document.querySelector("#fake-temperature");
+  let temperatureText = document.querySelector("#temperature");
   temperatureText.innerHTML = celsius;
   getWind(response);
   getCurrentDate(response);
   getWeatherDescription(response);
   let weatherIconElement = document.getElementById("weather-forecast-icon");
   weatherIconElement.src = `img/weather-icons/png/${response.data.weather[0].icon}.png`;
+  getForecast(response.data.coord);
   return celsius;
 };
 
+// Updates the name of the city, turns it to lower cases, removes white spaces, then calls the function that updates the weather and checks if nightmode should be enabled.
 let displayCity = (event) => {
+  let cityInput = "";
   event.preventDefault();
   cityInput = document.getElementById("search").value.toLowerCase().trim();
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=${units}`;
@@ -135,41 +125,50 @@ let displayCity = (event) => {
   axios.get(apiUrl).then(nightMode);
 };
 
+// Converts C to F and back
 let temperatureConversion = () => {
-  if (temperatureLink.innerHTML !== "°C") {
-    fakeFahrenheit = celsiusToFahrenheit(celsius);
+  let temperatureElement = document.querySelector("#temperature");
+  let celsiusIconElement = document.querySelector(".celsius");
+  if (temperatureLink.innerHTML === "°F") {
+    fahrenheit = celsiusToFahrenheit(celsius);
     temperatureLink.innerHTML = "°C";
     celsiusIconElement.innerHTML = "°F |";
-    fakeTemperature.innerHTML = fakeFahrenheit;
-    return fakeFahrenheit;
-  } else if (temperatureLink.innerHTML !== "°F") {
-    fakeCelsius = fahrenheitToCelsius(fakeFahrenheit);
+    temperatureElement.innerHTML = fahrenheit;
+    return fahrenheit;
+  } else if (temperatureLink.innerHTML === "°C") {
+    celsius = fahrenheitToCelsius(fahrenheit);
     temperatureLink.innerHTML = "°F";
     celsiusIconElement.innerHTML = "°C |";
-    fakeTemperature.innerHTML = fakeCelsius;
-    return fakeCelsius;
+    temperatureElement.innerHTML = celsius;
+    return celsius;
   }
 };
 
+// Locking away the alert to ask for user's geolocation behind a function
 let geoPosition = () => {
   navigator.geolocation.getCurrentPosition(positionCoordinates);
 };
 
-let geoLocation = (response) => {
-  let location = response.data.name;
-  cityNameText.innerHTML = `${lowerToUpperCase(location)}`;
-  updateWeather(response);
-  return location;
-};
-
+// Gets the users coordinates in order to find the name of the city
 let positionCoordinates = (position) => {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(geoLocation);
 };
+
+// Uses the users location to find the city name and update weather and forecast accordingly
+let geoLocation = (response) => {
+  let location = response.data.name;
+  cityNameText.innerHTML = `${lowerToUpperCase(location)}`;
+  updateWeather(response);
+  getForecast(response.data.coord);
+  return location;
+};
+
+// Implements style changes if the weather icon is labeled with "n" and the ability to revert back to ligth mode upon new search
 let nightMode = (response) => {
-  let bodyElement = document.querySelector("#body");
+  bodyElement = document.querySelector("#body");
   let weatherCardElement = document.querySelector(".weather-card");
   let searchElement = document.querySelector("#search");
   let socialLinksElement = document.querySelector("#links");
@@ -193,9 +192,45 @@ let nightMode = (response) => {
     searchElement.style.backgroundColor = "#0064a0";
     cityNameText.style.color = "#cebdc7";
     socialLinksElement.style.background = "#0064a0";
+    weatherDescriptionElement.style.color = "#fff";
   }
 };
 
+// Displays forecast elements by looping through the days and inserting HTML with every iteration
+let displayForecast = (response) => {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = ``;
+  let i = 0;
+  while (i < 5) {
+    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    let forecastDay = days[i];
+    let forecastIcon = `${response.data.current.weather[0].icon}`;
+    let nightOrDayIcon = forecastIcon.charAt(2);
+    let weatherIcon = `${response.data.daily[i].weather[0].icon.slice(0, -1)}`;
+    weatherIcon += nightOrDayIcon;
+    let weatherDescription = response.data.daily[i].weather[0].description;
+    let minimumTemp = Math.round(response.data.daily[i].temp.min);
+    let maximumTemp = Math.round(response.data.daily[i].temp.max);
+    forecastHTML += `
+            <div class="weather-forecast-one">
+            <p class="forecast-text forecast">${forecastDay}</p>
+
+            <img
+              src="img/weather-icons/png/${weatherIcon}.png"
+              class="weather-forecast-icon"
+              alt="${weatherDescription} weather icon"
+            />
+            <p class="forecast-temperature forecast">
+              <span class="min-temperature"> ${minimumTemp}°</span>
+              <span class="max-temperature">${maximumTemp}°</span>
+            </p>
+          </div>`;
+    i++;
+  }
+  forecastElement.innerHTML = forecastHTML;
+};
+
+// Buttons
 form.addEventListener("submit", displayCity);
 temperatureLink.addEventListener("click", temperatureConversion);
 geoButton.addEventListener("click", geoPosition);

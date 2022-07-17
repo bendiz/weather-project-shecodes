@@ -81,7 +81,7 @@ form {
   opacity: 50%;
   padding: 1vw;
 }
-#fake-temperature {
+#temperature {
   font-size: 3.5rem;
   margin: 0.5rem 0 0;
   font-weight: 800;
@@ -185,25 +185,31 @@ img.weather-icon {
   padding: 4vw 0vw 0;
 }
 
-.weather-forecast-one,
-.weather-forecast-two,
-.weather-forecast-three,
-.weather-forecast-four,
-.weather-forecast-five {
+.weather-forecast-one {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.forecast {
+  opacity: 50%;
+  font-size: 0.8rem;
+  font-weight: 300;
+  margin-bottom: 0;
 }
 
 .weather-forecast-icon {
   width: 30%;
 }
 
-.forecast {
-  font-size: 0.8rem;
-  font-weight: 300;
-  margin-bottom: 0;
+.min-temperature {
+  margin-right: 0.188rem;
 }
+
+.max-temperature {
+  opacity: 50%;
+}
+
 #links {
   width: 100%;
   align-items: center;
