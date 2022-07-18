@@ -128,6 +128,7 @@ let updateWeather = (response) => {
   middleSectionElement.classList.remove("middle-section");
   weatherIconElement.src = `img/weather-icons/png/${response.data.weather[0].icon}.png`;
   weatherIconElement.style.width = `60%`;
+  weatherIconElement.style.opacity = `100%`;
   weatherSectionElement.style.justifyContent = `flex-start`;
   celsiusFahrenheitElements.style.display = "flex";
   getForecast(response.data.coord);

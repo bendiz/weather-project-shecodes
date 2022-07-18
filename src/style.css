@@ -218,6 +218,7 @@ form {
 
 img.weather-icon {
   margin-left: -10%;
+  opacity: 60%;
 }
 
 .bottom-section {
