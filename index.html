@@ -36,7 +36,6 @@
       <div class="weather-card">
         <p class="current-date-time"></p>
         <p class="current-date-time" id="current-date-time">
-          Last Updated: 14.Jul 2022 : 20:55
         </p>
         <form id="search-form">
           <input
@@ -56,19 +55,18 @@
             <i class="fa-solid fa-location-dot"></i>
           </button>
         </form>
-
         <div class="middle-section">
           <div class="current-weather-section">
             <img
-              src="img/weather-icons/png/11d.png"
-              alt="Weather Icon"
+            src="img\weather-icons\png\weathericonanimation.gif"
+              width="90%"
               class="weather-icon"
               id="weather-forecast-icon"
             />
             <div class="info-left">
               <link class="current-temp" />
-              <div class="fake-temperature-container">
-                <h2 id="temperature">22</h2>
+              <div class="temperature-container">
+                <h2 id="temperature"></h2>
                 <span class="temperature-letters"
                   ><p class="celsius">°C |</p>
                   <a href="#" id="celsius-fahrenheit">°F</a>
@@ -77,20 +75,19 @@
             </div>
             <div class="weather-information">
               <p class="weather-description" id="weather-description">
-                Weather Description
               </p>
-                 <span class="current-date-time" id="wind-speed"><i class="fa-solid fa-wind" id="wind-icon"> </i></span>
-                 <span id="humidity" class="current-date-time"><i class="fa-solid fa-droplet humidity"></i></span>
+                 <span class="current-date-time" id="wind-speed"></span>
+                 <span id="humidity" class="current-date-time"></span>
                  </div>
             </div>
           <div class="info-right">
-            <h1 class="current-city" id="current-city">City name..</h1>
+            <h1 class="current-city" id="current-city"></h1>
             <h3 class="current-day" id="current-day"></h3>
           </div>
         </div>
         <div class="bottom-section" id="forecast">
           <div class="weather-forecast-one">
-            <p class="forecast-text forecast" id="forecast-text">Forecast</p>
+            <p class="forecast-text forecast" id="forecast-text"></p>
             <p class="forecast-temperature forecast">
               <span class="min-temperature" id="min-temperature"> </span>
               <span class="max-temperature" id="max-temperature"></span>
