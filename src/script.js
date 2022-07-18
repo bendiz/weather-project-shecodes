@@ -73,6 +73,7 @@ let getCurrentDate = (response) => {
   let currentMinute = String(date.getMinutes()).padStart(2, "0");
   let currentTimeText = document.querySelector("#current-date-time");
   currentTimeText.innerHTML = `Last updated: ${currentDate}.${currentMonth} ${currentYear} @ ${currentHour}:${currentMinute}`;
+  return date;
 };
 
 // Gets current wind in m/s
@@ -121,7 +122,7 @@ let updateWeather = (response) => {
   temperatureText.innerHTML = celsius;
   getWind(response);
   getHumidity(response);
-  getCurrentDate(response);
+  currentDate = getCurrentDate(response);
   getWeatherDescription(response);
   middleSectionElement.classList.add("middle-section-search");
   middleSectionElement.classList.remove("middle-section");
@@ -217,10 +218,11 @@ let nightMode = (response) => {
 let displayForecast = (response) => {
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = ``;
+  let currentDay = currentDate.getDay();
   let i = 0;
   while (i < 5) {
     let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    let forecastDay = days[i];
+    let forecastDay = days[currentDay + i];
     let forecastIcon = `${response.data.current.weather[0].icon}`;
     let nightOrDayIcon = forecastIcon.charAt(2);
     let weatherIcon = `${response.data.daily[i].weather[0].icon.slice(0, -1)}`;
