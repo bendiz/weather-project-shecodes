@@ -79,7 +79,13 @@ let getCurrentDate = (response) => {
 let getWind = (response) => {
   let wind = Math.round(response.data.wind.speed);
   let windText = document.querySelector("#wind-speed");
-  windText.innerHTML = `${wind}m/s`;
+  windText.innerHTML = ` <i class="fa-solid fa-wind" id="wind-icon"></i> ${wind}m/s`;
+};
+
+let getHumidity = (response) => {
+  let humidity = response.data.main.humidity;
+  let humidityText = document.querySelector("#humidity");
+  humidityText.innerHTML = `<i class="fa-solid fa-droplet humidity"></i> ${humidity}%`;
 };
 
 // Gets the weather description and updates the description to uppercase letters in the beginning of every word.
@@ -106,6 +112,7 @@ let updateWeather = (response) => {
   let temperatureText = document.querySelector("#temperature");
   temperatureText.innerHTML = celsius;
   getWind(response);
+  getHumidity(response);
   getCurrentDate(response);
   getWeatherDescription(response);
   let weatherIconElement = document.getElementById("weather-forecast-icon");

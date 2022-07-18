@@ -60,7 +60,7 @@
         <div class="middle-section">
           <div class="current-weather-section">
             <img
-              src="img/weather-icons/png/01d.png"
+              src="img/weather-icons/png/11d.png"
               alt="Weather Icon"
               class="weather-icon"
               id="weather-forecast-icon"
@@ -72,14 +72,17 @@
                 <span class="temperature-letters"
                   ><p class="celsius">°C |</p>
                   <a href="#" id="celsius-fahrenheit">°F</a>
-                  <p class="current-date-time" id="wind-speed">19m/s</p></span
-                >
+                  
               </div>
             </div>
-            <p class="weather-description" id="weather-description">
-              Weather Description
-            </p>
-          </div>
+            <div class="weather-information">
+              <p class="weather-description" id="weather-description">
+                Weather Description
+              </p>
+                 <span class="current-date-time" id="wind-speed"><i class="fa-solid fa-wind" id="wind-icon"> </i></span>
+                 <span id="humidity" class="current-date-time"><i class="fa-solid fa-droplet humidity"></i></span>
+                 </div>
+            </div>
           <div class="info-right">
             <h1 class="current-city" id="current-city">City name..</h1>
             <h3 class="current-day" id="current-day"></h3>
@@ -87,17 +90,10 @@
         </div>
         <div class="bottom-section" id="forecast">
           <div class="weather-forecast-one">
-            <p class="forecast-text forecast" id="forecast-text">Thu</p>
-
-            <img
-              src="img/weather-icons/png/01d.png"
-              class="weather-forecast-icon"
-              id="forecast-icon"
-              alt="rain"
-            />
+            <p class="forecast-text forecast" id="forecast-text">Forecast</p>
             <p class="forecast-temperature forecast">
-              <span class="min-temperature" id="min-temperature"> 16°</span>
-              <span class="max-temperature" id="max-temperature">18°</span>
+              <span class="min-temperature" id="min-temperature"> </span>
+              <span class="max-temperature" id="max-temperature"></span>
             </p>
           </div>
         </div>
