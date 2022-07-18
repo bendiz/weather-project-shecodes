@@ -118,6 +118,7 @@ let updateWeather = (response) => {
   let weatherSectionElement = document.querySelector(
     ".current-weather-section"
   );
+  let h4Element = document.querySelector("h4");
   celsius = Math.round(response.data.main.temp);
   temperatureText.innerHTML = celsius;
   getWind(response);
@@ -129,6 +130,7 @@ let updateWeather = (response) => {
   weatherIconElement.src = `img/weather-icons/png/${response.data.weather[0].icon}.png`;
   weatherIconElement.style.width = `60%`;
   weatherIconElement.style.opacity = `100%`;
+  h4Element.style.display = "none";
   weatherSectionElement.style.justifyContent = `flex-start`;
   celsiusFahrenheitElements.style.display = "flex";
   getForecast(response.data.coord);
