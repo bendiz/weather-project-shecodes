@@ -108,7 +108,7 @@ let getForecast = (response) => {
 
 //  Finds the rounded number of temperature and updates the current wind, "last updated", weather description, weather icon and forecast.
 let updateWeather = (response) => {
-  let middleSectionElement = document.querySelector(".middle-section");
+  let middleSectionElement = document.querySelector("#weather-section");
   let celsiusFahrenheitElements = document.querySelector(
     ".temperature-container"
   );
@@ -130,6 +130,7 @@ let updateWeather = (response) => {
   weatherSectionElement.style.justifyContent = `flex-start`;
   celsiusFahrenheitElements.style.display = "flex";
   getForecast(response.data.coord);
+  console.log();
   return celsius;
 };
 
@@ -180,6 +181,7 @@ let positionCoordinates = (position) => {
 let geoLocation = (response) => {
   let location = response.data.name;
   cityNameText.innerHTML = `${lowerToUpperCase(location)}`;
+  nightMode(response);
   updateWeather(response);
   getForecast(response.data.coord);
   return location;
