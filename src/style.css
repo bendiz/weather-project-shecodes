@@ -371,8 +371,8 @@ img.weather-icon {
     width: 95%;
   }
   .weather-card {
-    width: 94vw;
-    height: 40vh;
+    width: 90vw;
+    height: 60vh;
   }
 
   #temperature {
@@ -411,3 +411,4 @@ img.weather-icon {
     font-size: 1rem;
   }
 }
+
