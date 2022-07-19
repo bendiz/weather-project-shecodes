@@ -1,3 +1,11 @@
+:root {
+  --primary-text-color: #fff;
+  --primary-font-family: "Titillium Web", sans-serif;
+  --blue-color: #0064a0;
+  --link-color: #cebdc7;
+  --box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -10,13 +18,13 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  font-family: "Titillium Web", sans-serif;
+  font-family: var(--primary-font-family);
 }
 
 h4 {
   position: relative;
   padding-top: 2rem;
-  font-family: "Titillium Web", sans-serif;
+  font-family: var(--primary-font-family);
 }
 
 #body {
@@ -31,7 +39,7 @@ form {
 
 .container {
   width: 100%;
-  color: #fff;
+  color: var(--primary-text-color);
 }
 
 .weather-card {
@@ -39,7 +47,7 @@ form {
   width: 50vw;
   height: 32vw;
   border-radius: 0.2rem;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
+  box-shadow: var(--box-shadow);
   background: linear-gradient(
     -225deg,
     #8dc8ff7d 0%,
@@ -65,23 +73,23 @@ form {
   margin: 2vw 0 0 5%;
   font-size: 1rem;
   opacity: 60%;
-  background-color: #0064a0;
-  color: #cebdc7;
+  background-color: var(--blue-color);
+  color: var(--primary-text-color);
 }
 
 #search::placeholder {
-  color: #fff;
+  color: var(--primary-text-color);
 }
 
 #geo-button {
   padding: 2.5vw 2vw 0 1vw;
   border: 0;
   background-color: transparent;
-  color: #fff;
+  color: var(--primary-text-color);
   opacity: 50%;
 }
 #geo-button:hover {
-  color: #cebdc7;
+  color: var(--link-color);
 }
 .weather-card ::placeholder {
   opacity: 50%;
@@ -110,18 +118,18 @@ form {
   font-size: 1rem;
   display: inline;
   text-decoration: none;
-  color: #fff;
+  color: var(--primary-text-color);
 }
 
 #celsius-fahrenheit:hover {
-  color: #cebdc7;
+  color: var(--link-color);
 }
 
 .middle-section-search {
   display: flex;
   width: 80%;
   height: 100%;
-  font-family: "Titillium Web", sans-serif;
+  font-family: var(--primary-font-family);
   align-items: center;
   gap: 8vw;
   margin-top: 1vw;
@@ -131,7 +139,7 @@ form {
 .middle-section {
   width: 50%;
   height: 50%;
-  font-family: "Titillium Web", sans-serif;
+  font-family: var(--primary-font-family);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -140,7 +148,7 @@ form {
 
 #current-city {
   font-size: 3rem;
-  color: #fff;
+  color: var(--primary-text-color);
   font-weight: 800;
 }
 
@@ -203,7 +211,7 @@ form {
 
 .weather-description {
   font-size: 0.8rem;
-  color: #fff;
+  color: var(--primary-text-color);
   text-align: center;
   width: 100%;
   margin: 0.5rem 0 0;
@@ -256,10 +264,10 @@ img.weather-icon {
 #links {
   width: 100%;
   align-items: center;
-  background-color: #0064a0;
+  background-color: var(--blue-color);
   bottom: 0;
   left: 0;
-  color: #fff;
+  color: var(--primary-text-color);
   display: flex;
   flex-shrink: 0;
   font-size: 1rem;
@@ -274,10 +282,10 @@ img.weather-icon {
 }
 
 .social-links {
-  color: #fff;
+  color: var(--primary-text-color);
 }
 .social-links:hover {
-  color: #cebdc7;
+  color: var(--link-color);
 }
 
 @media (max-width: 1665px) {
